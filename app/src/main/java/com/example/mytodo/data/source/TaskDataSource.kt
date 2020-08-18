@@ -1,20 +1,42 @@
 package com.example.mytodo.data.source
 
 import com.example.mytodo.data.model.Task
-import com.example.mytodo.data.source.local.base.OnDataLoadedCallback
 
 interface TaskDataSource {
 
-    interface Local {
+    interface LoadTasksCallback{
 
-        fun getTasks(callback: OnDataLoadedCallback<List<Task>>)
+        fun onTasksLoaded(tasks: List<Task>)
 
-        fun addTask(task: Task, callback: OnDataLoadedCallback<Boolean>)
-
-        fun deleteTask(id: String, callback: OnDataLoadedCallback<Boolean>)
-
-        fun updateTask(task: Task, callback: OnDataLoadedCallback<Task>)
+        fun onDataNotAvailable()
     }
 
-    interface Remote
+    interface GetTaskCallback {
+
+        fun onTaskLoaded(task: Task)
+
+        fun onDataNotAvailable()
+    }
+
+    fun getTasks(callback: LoadTasksCallback)
+
+    fun getTask(taskId: String, callback: GetTaskCallback)
+
+    fun saveTask(task: Task)
+
+    fun completeTask(task: Task)
+
+    fun completeTask(taskId: String)
+
+    fun activateTask(task: Task)
+
+    fun activateTask(taskId: String)
+
+    fun clearCompletedTasks()
+
+    fun refreshTasks()
+
+    fun deleteAllTasks()
+
+    fun deleteTask(taskId: String)
 }

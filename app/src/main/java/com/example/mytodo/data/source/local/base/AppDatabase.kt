@@ -24,7 +24,8 @@ class AppDatabase private constructor(context: Context, dbName: String, version:
         private const val CREATE_TABLE_TASK = "CREATE TABLE " + Task.TABLE_NAME + "(" +
                 Task.ID + " TEXT PRIMARY KEY, "+
                 Task.TITLE + " TEXT, " +
-                Task.DESCRIPTION + " TEXT)"
+                Task.DESCRIPTION + " TEXT, " +
+                Task.IS_COMPLETED + " INTEGER) "
 
         private const val DROP_TABLE_TASK = "DROP TABLE IF EXISTS " + Task.TABLE_NAME
 

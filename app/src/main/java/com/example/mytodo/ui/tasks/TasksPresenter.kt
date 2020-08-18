@@ -2,7 +2,6 @@ package com.example.mytodo.ui.tasks
 
 import com.example.mytodo.data.model.Task
 import com.example.mytodo.data.source.TasksRepository
-import com.example.mytodo.data.source.local.base.OnDataLoadedCallback
 
 class TasksPresenter (
     private val view: TasksContract.View,
@@ -12,6 +11,8 @@ class TasksPresenter (
     override fun start() {
         getTasks()
     }
+
+    override var currentFiltering = TasksFilterType.ALL_TASKS
 
     override fun addTask(task: Task) {
         repository.addTask(task, object : OnDataLoadedCallback<Boolean> {

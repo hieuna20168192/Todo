@@ -1,7 +1,6 @@
 package com.example.mytodo.data.source
 
 import com.example.mytodo.data.model.Task
-import com.example.mytodo.data.source.local.base.OnDataLoadedCallback
 
 class TasksRepository private constructor(
     private val local: TaskDataSource.Local,

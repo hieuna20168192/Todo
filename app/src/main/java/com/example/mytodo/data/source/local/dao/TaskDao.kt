@@ -6,10 +6,17 @@ interface TaskDao {
 
     fun getTasks(): List<Task>
 
-    fun addTask(task: Task): Boolean
+    fun getTaskById(taskId: String): Task?
 
-    fun deleteTask(id: String): Boolean
+    fun insertTask(task: Task)
 
-    fun updateTask(task: Task)
+    fun updateTask(task: Task): Int
 
+    fun updateCompleted(taskId: String, completed: Boolean)
+
+    fun deleteTaskById(taskId: String): Int
+
+    fun deleteTasks()
+
+    fun deleteCompletedTasks(): Int
 }

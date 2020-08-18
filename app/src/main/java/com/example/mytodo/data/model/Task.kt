@@ -2,13 +2,14 @@ package com.example.mytodo.data.model
 
 import android.content.ContentValues
 import android.database.Cursor
+import com.google.gson.annotations.SerializedName
 import java.util.*
 
 data class Task(
     val id: String = UUID.randomUUID().toString(),
     val title: String = "",
     val description: String = "",
-    val isCompleted: Int = 0
+    var isCompleted: Int = 0
 ) {
 
     constructor(cursor: Cursor) : this(
@@ -25,11 +26,20 @@ data class Task(
         put(IS_COMPLETED, isCompleted)
     }
 
+    val titleForList: String
+        get() = if (title.isNotEmpty()) title else description
+    val isActive: Boolean
+        get() = isCompleted == 0
+
+    val isEmpty: Boolean
+        get() = title.isEmpty() && description.isEmpty()
+
     companion object {
         const val TABLE_NAME = "task"
         const val ID = "id"
         const val TITLE = "title"
         const val DESCRIPTION = "description"
-        const val IS_COMPLETED = "is_completed"
+        const val IS_COMPLETED = "completed"
     }
 }
+

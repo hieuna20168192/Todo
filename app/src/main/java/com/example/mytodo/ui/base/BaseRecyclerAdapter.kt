@@ -1,5 +1,6 @@
 package com.example.mytodo.ui.base
 
+import android.util.Log
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
@@ -10,6 +11,7 @@ abstract class BaseRecyclerAdapter<T, V : BaseViewHolder<T>> : RecyclerView.Adap
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(viewHolder: V, position: Int) {
+        Log.d("Order ", "onBindViewHolder is running")
         getItem(position)?.let { viewHolder.onBindData(it) }
     }
 
@@ -23,6 +25,7 @@ abstract class BaseRecyclerAdapter<T, V : BaseViewHolder<T>> : RecyclerView.Adap
             clear()
             addAll(newItems)
         }
+        Log.d("Order ", "BaseRecyclerView updateData ${items.size}")
         diffResult.dispatchUpdatesTo(this)
     }
 
@@ -39,3 +42,5 @@ abstract class BaseRecyclerAdapter<T, V : BaseViewHolder<T>> : RecyclerView.Adap
         notifyItemRangeChanged(position, itemCount)
     }
 }
+
+

@@ -31,6 +31,21 @@ class TaskDaoImpl private constructor(context: Context) : TaskDao {
     }
 
     override fun getTaskById(taskId: String): Task? {
+
+        var selectionClause = ""
+        val selectionArgs = taskId?.takeIf {
+            it.isNotEmpty()
+        }?.let {
+            selectionClause = "${Task.ID} = ?"
+            arrayOf(it)
+        } ?: return null
+
+        val cursor =
+            database.query(Task.TABLE_NAME, null, selectionClause, selectionArgs, null, null, null)
+                .apply {
+                    moveToFirst()
+                }
+
         return null
     }
 

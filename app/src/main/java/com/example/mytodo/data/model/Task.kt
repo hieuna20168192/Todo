@@ -8,7 +8,7 @@ data class Task(
     val id: String = UUID.randomUUID().toString(),
     val title: String = "",
     val description: String = "",
-    val isCompleted: Int = 0
+    var isCompleted: Int = 0
 ) {
 
     constructor(cursor: Cursor) : this(
@@ -24,6 +24,14 @@ data class Task(
         put(DESCRIPTION, description)
         put(IS_COMPLETED, isCompleted)
     }
+
+    val titleForList: String
+        get() = if (title.isNotEmpty()) title else description
+    val isActive: Boolean
+        get() = isCompleted == 0
+
+    val isEmpty: Boolean
+        get() = title.isEmpty() && description.isEmpty()
 
     companion object {
         const val TABLE_NAME = "task"

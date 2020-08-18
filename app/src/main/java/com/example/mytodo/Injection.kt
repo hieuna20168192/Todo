@@ -1,17 +1,16 @@
 package com.example.mytodo
 
 import android.content.Context
-import com.example.mytodo.data.source.TasksRepository
+import com.example.mytodo.data.source.TaskRepository
 import com.example.mytodo.data.source.local.TasksLocalDataSource
 import com.example.mytodo.data.source.local.dao.TaskDaoImpl
 import com.example.mytodo.data.source.remote.TaskRemoteDataSource
+import com.example.mytodo.utils.AppExecutors
 
 object Injection {
-    fun provideTasksRepository(context: Context): TasksRepository {
-        val localDataSource = TasksLocalDataSource.getInstance(TaskDaoImpl.getInstance(context))
-        val remoteDataSource = TaskRemoteDataSource
-        val repository =  TasksRepository.getInstance(localDataSource, remoteDataSource)
-        return TasksRepository.getInstance(localDataSource,
-        remoteDataSource)
+    fun provideTasksRepository(context: Context): TaskRepository {
+
+        return TaskRepository.getInstance(TaskRemoteDataSource,
+            TasksLocalDataSource.getInstance(AppExecutors(), TaskDaoImpl.getInstance(context)))
     }
 }

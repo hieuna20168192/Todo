@@ -50,8 +50,8 @@ class TasksActivity : BaseActivity() {
 
         // Create the presenter
         tasksPresenter = TasksPresenter(
-            tasksFragment,
-            Injection.provideTasksRepository(applicationContext)
+            Injection.provideTasksRepository(applicationContext),
+            tasksFragment
         ).apply {
             // Load previously saved state, if available
             if (savedInstanceState != null) {

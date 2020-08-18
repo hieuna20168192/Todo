@@ -1,13 +1,13 @@
 package com.example.mytodo.ui.base
 
-interface BaseView {
+interface BaseView<T> {
 
-    fun showLoading() {
-    }
+    var presenter: T
 
-    fun hideLoading() {
-    }
+    fun showLoading()
 
-    fun toast(obj: Any) {
-    }
+    fun hideLoading()
+
+    fun toast(obj: Any)
+
 }

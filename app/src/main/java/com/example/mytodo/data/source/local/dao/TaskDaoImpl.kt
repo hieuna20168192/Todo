@@ -8,6 +8,15 @@ class TaskDaoImpl private constructor(context: Context) : TaskDao {
 
     private val database = AppDatabase.getInstance(context).writableDatabase
 
+    companion object {
+        private var instance: TaskDaoImpl? = null
+
+        fun getInstance(context: Context) =
+            instance ?: TaskDaoImpl(context).also {
+                instance = it
+            }
+    }
+
     override fun getTasks(): List<Task> {
         val cursor = database.query(Task.TABLE_NAME, null, null, null, null, null, null).apply {
             moveToFirst()
@@ -21,23 +30,31 @@ class TaskDaoImpl private constructor(context: Context) : TaskDao {
         }
     }
 
-    override fun addTask(task: Task): Boolean =
-        database.insert(Task.TABLE_NAME, null, task.getContentValues()) > 0
-
-    override fun deleteTask(id: String): Boolean {
-        TODO("Not yet implemented")
+    override fun getTaskById(taskId: String): Task? {
+        return null
     }
 
-    override fun updateTask(task: Task) {
-        TODO("Not yet implemented")
+    override fun insertTask(task: Task) {
+        database.insert(Task.TABLE_NAME, null, task.getContentValues())
     }
 
-    companion object {
-        private var instance: TaskDaoImpl? = null
+    override fun updateTask(task: Task): Int {
+        return 0
+    }
 
-        fun getInstance(context: Context) =
-            instance ?: TaskDaoImpl(context).also {
-                instance = it
-            }
+    override fun updateCompleted(taskId: String, completed: Boolean) {
+
+    }
+
+    override fun deleteTaskById(taskId: String): Int {
+        return 0
+    }
+
+    override fun deleteTasks() {
+
+    }
+
+    override fun deleteCompletedTasks(): Int {
+        return 0
     }
 }

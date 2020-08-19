@@ -11,28 +11,33 @@
         android:layout_height="match_parent"
         android:clickable="true"
         android:orientation="vertical">
-        <LinearLayout
-            android:id="@+id/tasksLL"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/filteringLabel"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/tasksLL"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"/>
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/filteringLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tasks_list"
-                />
-        </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:id="@+id/tasks_list"
+                    />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
             android:id="@+id/noTasks"

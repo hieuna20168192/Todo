@@ -1,52 +1,39 @@
 package com.example.mytodo.data.source.remote
 
-import com.example.mytodo.data.model.Task
 import com.example.mytodo.data.source.TaskDataSource
+import com.example.mytodo.data.source.remote.dao.RequestDao
+import com.example.mytodo.utils.AppExecutors
 
-object TaskRemoteDataSource : TaskDataSource {
+class TaskRemoteDataSource(
+    private val appExecutors: AppExecutors,
+    private val requestDao: RequestDao
+) : TaskDataSource {
 
     override fun getTasks(callback: TaskDataSource.LoadTasksCallback) {
-        TODO("Not yet implemented")
+
+        appExecutors.diskIO.execute {
+            val tasks = requestDao.getTasks()
+            appExecutors.mainThread.execute {
+                if (tasks.isEmpty()) {
+                    callback.onDataNotAvailable()
+                } else {
+                    callback.onTasksLoaded(tasks)
+                }
+            }
+        }
     }
 
     override fun getTask(taskId: String, callback: TaskDataSource.GetTaskCallback) {
-        TODO("Not yet implemented")
+        appExecutors.diskIO.execute {
+            val task = requestDao.getTaskById(taskId)
+            appExecutors.mainThread.execute {
+                if (task != null) {
+                    callback.onTaskLoaded(task)
+                } else {
+                    callback.onDataNotAvailable()
+                }
+            }
+        }
     }
-
-    override fun saveTask(task: Task) {
-        TODO("Not yet implemented")
-    }
-
-    override fun completeTask(task: Task) {
-        TODO("Not yet implemented")
-    }
-
-    override fun completeTask(taskId: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun activateTask(task: Task) {
-        TODO("Not yet implemented")
-    }
-
-    override fun activateTask(taskId: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun clearCompletedTasks() {
-        TODO("Not yet implemented")
-    }
-
-    override fun refreshTasks() {
-        TODO("Not yet implemented")
-    }
-
-    override fun deleteAllTasks() {
-        TODO("Not yet implemented")
-    }
-
-    override fun deleteTask(taskId: String) {
-        TODO("Not yet implemented")
-    }
-    
 }
+

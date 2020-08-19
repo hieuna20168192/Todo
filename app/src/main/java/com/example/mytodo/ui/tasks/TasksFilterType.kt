@@ -16,3 +16,4 @@ enum class TasksFilterType {
      */
     COMPLETED_TASKS
 }
+

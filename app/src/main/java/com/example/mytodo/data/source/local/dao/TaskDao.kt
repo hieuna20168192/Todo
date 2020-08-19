@@ -20,3 +20,4 @@ interface TaskDao {
 
     fun deleteCompletedTasks(): Int
 }
+

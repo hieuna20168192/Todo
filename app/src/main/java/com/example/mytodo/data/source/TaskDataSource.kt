@@ -18,25 +18,26 @@ interface TaskDataSource {
         fun onDataNotAvailable()
     }
 
-    fun getTasks(callback: LoadTasksCallback)
+    fun getTasks(callback: LoadTasksCallback) {}
 
-    fun getTask(taskId: String, callback: GetTaskCallback)
+    fun getTask(taskId: String, callback: GetTaskCallback) {}
 
-    fun saveTask(task: Task)
+    fun saveTask(task: Task) {}
 
-    fun completeTask(task: Task)
+    fun completeTask(task: Task) {}
 
-    fun completeTask(taskId: String)
+    fun completeTask(taskId: String) {}
 
-    fun activateTask(task: Task)
+    fun activateTask(task: Task) {}
 
-    fun activateTask(taskId: String)
+    fun activateTask(taskId: String) {}
 
-    fun clearCompletedTasks()
+    fun clearCompletedTasks() {}
 
-    fun refreshTasks()
+    fun refreshTasks() {}
 
-    fun deleteAllTasks()
+    fun deleteAllTasks() {}
 
-    fun deleteTask(taskId: String)
+    fun deleteTask(taskId: String) {}
 }
+
